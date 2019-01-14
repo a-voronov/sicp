@@ -8,11 +8,11 @@
 (define (average x y)
   (/ (+ x y) 2))
 
-(define (square x) (* x x))
-
 ; Original
 
-(define (sqr x)
+(define (sqrt x)
+  (define (square x) (* x x))
+  
   (define (good-enough? guess x)
     (< (abs (- (square guess) x)) 0.001))
   
@@ -25,7 +25,7 @@
 
 ; Alternative
 
-(define (alt-sqr x)
+(define (alt-sqrt x)
   (define (sqrt-iter guess x)
     ; An alternative strategy for implementing good-enough?
     ; is to watch how guess changes from one iteration to the next
@@ -40,14 +40,20 @@
 
   (sqrt-iter 1.0 x))
 
-(sqr 0.5e-4)       ; 0.031781009679092864
-(alt-sqr 0.05e-4)  ; 0.00223606797749979
+(sqrt 0.5e-4)       ; 0.031781009679092864
+(alt-sqrt 0.05e-4)  ; 0.00223606797749979
 
-(sqr 16)           ; 4.000000636692939
-(alt-sqr 16)       ; 4.0
+(sqrt 16)           ; 4.000000636692939
+(alt-sqrt 16)       ; 4.0
 
-(sqr 1.7e-307)     ; 0.03125
-(alt-sqr 1.7e-307) ; 4.123105625617661e-154
+(sqrt 1.7e-307)     ; 0.03125
+(alt-sqrt 1.7e-307) ; 4.123105625617661e-154
 
-; (sqr 1.7e+308)   ; loops infinitely because it doesn't have small enough value to satisfy good-enough?
-(alt-sqr 1.7e+308) ; 1.3038404810405297e+154
+; (sqrt 1.7e+308)   ; loops infinitely because it doesn't have small enough value to satisfy good-enough?
+(alt-sqrt 1.7e+308) ; 1.3038404810405297e+154
+
+(sqrt 0)            ; 0.03125
+; (alt-sqrt 0)      ; loops infinitely
+
+; (sqrt -1)         ; loops infinitely
+; (alt-sqrt -1)     ; loops infinitely
