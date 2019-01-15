@@ -8,7 +8,7 @@
    (square y)))
 
 (define (task x y z)
-  (if (and (< x y) (< x z))
+  (if (and (<= x y) (<= x z))
       (square-sum y z)
       (task y z x)))
 
@@ -20,3 +20,13 @@
 (task 3 2 1)
 
 ; 13
+
+(task 3 2 2)
+(task 2 3 2)
+(task 2 2 3)
+
+; 13
+
+(task 2 2 2)
+
+; 8
