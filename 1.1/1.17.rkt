@@ -19,8 +19,18 @@
   (iter 0 (if (even? x) x (- x 1))))
 
 (define (fast-mult-rec a b)
-  (define x (max a b))
-  (define m (min a b))
+  (define na (negative? a))
+  (define nb (negative? b))
+
+  (define absa (abs a))
+  (define absb (abs b))
+  
+  (define n
+    (or (and na (not nb))
+        (and nb (not na))))
+
+  (define x (max absa absb))
+  (define m (min absa absb))
  
   (define (iter i r)
     (cond ((= i 0) 0)
@@ -28,6 +38,6 @@
           ((even? i) (double (iter (halve i) r)))
           (else (+ x (iter (- i 1) r)))))
   
-  (iter m x))
+  ((if n - +) 0 (iter m x)))
 
-(fast-mult-rec 5000000000 3000000000)
+(fast-mult-rec -5 3)
