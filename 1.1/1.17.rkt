@@ -40,4 +40,4 @@
   
   ((if n - +) 0 (iter m x)))
 
-(fast-mult-rec -5 3)
+(fast-mult-rec 50000000 -30000000)
